@@ -11,3 +11,4 @@ fall_right_spr=spr_player2_fall_right;
 die_spr=spr_player2_die;
 
 current_spr=jump_left_spr;
+other_player=obj_player_1;

@@ -30,6 +30,7 @@ player_state=state.dead;
 
 respawn_time=random_range(1*room_speed,2*room_speed);
 respawn_timer=0;
+other_player=noone;
 
 
 image_speed=1;
@@ -102,5 +103,5 @@ if(player_state==state.alive){
 }
 
 function GenerateDeathEffect(posX,posY){
-	instance_create_layer(posX,posY,"Instances",obj_death_effect);
+	instance_create_layer(posX,posY,"Effects",obj_death_effect);
 }

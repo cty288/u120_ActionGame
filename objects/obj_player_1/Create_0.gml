@@ -12,3 +12,4 @@ die_spr=spr_player1_die;
 
 current_spr=jump_left_spr;
 
+other_player=obj_player_2;

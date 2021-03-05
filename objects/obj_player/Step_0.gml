@@ -41,7 +41,8 @@ var new_y = y+move_y;
 for(var i=0; i<abs(move_y); i++){
 	new_y = y + sign(move_y);
 	var platform_collide_with = instance_place(x,new_y,obj_platform);
-	var player_collide_with = instance_place(x,new_y,obj_player);
+	//var player_collide_with = instance_place(x,new_y,obj_player);
+	
 	//hit the platform
 	if(move_y>0){
 		if(platform_collide_with!=noone){
@@ -55,7 +56,27 @@ for(var i=0; i<abs(move_y); i++){
 				break;
 			}
 		}
-		if(player_collide_with!=noone){
+		
+		if(y<other_player.y && other_player.player_state==state.alive){
+			if(other_player.y-y<=70 && abs(x-other_player.x)<=70){
+				y_speed=jump_vel;
+				move_y=jump_vel;
+				remainder_y=0;
+				y=new_y;
+				player_score++;
+				other_player.player_state=state.dead;
+				other_player.y_speed=15;
+				other_player.remainder_y=0;
+				audio_play_sound(player_bounce,1,false);
+				for(var i=0; i<irandom_range(1,3); i++){
+					pos_x=random_range(other_player.x-64,other_player.x+192);
+					pos_y=random_range(other_player.y,other_player.y+64);
+					GenerateDeathEffect(pos_x,pos_y);
+				}
+				break;
+			}
+		}
+		/*if(player_collide_with!=noone){
 			if(y<player_collide_with.y && player_collide_with.player_state==state.alive){
 				y_speed=jump_vel;
 				move_y=jump_vel;
@@ -68,12 +89,12 @@ for(var i=0; i<abs(move_y); i++){
 				audio_play_sound(player_bounce,1,false);
 				for(var i=0; i<irandom_range(1,3); i++){
 					pos_x=random_range(player_collide_with.x-64,player_collide_with.x+192);
-					pos_y=random_range(player_collide_with.y-64,player_collide_with.y);
+					pos_y=random_range(player_collide_with.y,player_collide_with.y+64);
 					GenerateDeathEffect(pos_x,pos_y);
 				}
 				break;
 			}
-		}
+		}*/
 			
 	}
 	y+=sign(move_y);
